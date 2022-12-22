@@ -49,19 +49,19 @@ public class King extends Chess {
             }
         }
 
-        if (x - 1 >= 4 && chessCheck[x - 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x-1][y].getStatus())!=0) {
+        if (x - 1 >= 4 && chessCheck[x - 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x - 1][y].getStatus()) != 0) {
             g2d.fillOval(pointOfChessX[x - 1] - 317, pointOfChessY[y] - 32, 10, 10);
             canEat[x - 1][y] = true;
         }
-        if (x + 1 <= 6 && chessCheck[x + 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x+1][y].getStatus())!=0) {
+        if (x + 1 <= 6 && chessCheck[x + 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x + 1][y].getStatus()) != 0) {
             g2d.fillOval(pointOfChessX[x + 1] - 317, pointOfChessY[y] - 32, 10, 10);
             canEat[x + 1][y] = true;
         }
-        if (y - 1 >= 8 && chessCheck[x][y - 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y-1].getStatus())!=0) {
+        if (y - 1 >= 8 && chessCheck[x][y - 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y - 1].getStatus()) != 0) {
             g2d.fillOval(pointOfChessX[x] - 317, pointOfChessY[y - 1] - 32, 10, 10);
             canEat[x][y - 1] = true;
         }
-        if (y + 1 <= 10 && chessCheck[x][y + 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y+1].getStatus())!=0) {
+        if (y + 1 <= 10 && chessCheck[x][y + 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y + 1].getStatus()) != 0) {
             g2d.fillOval(pointOfChessX[x] - 317, pointOfChessY[y + 1] - 32, 10, 10);
             canEat[x][y + 1] = true;
         }
@@ -88,15 +88,15 @@ public class King extends Chess {
         }
         if (y - 1 >= 8 && chessCheck[x][y - 1] == null) {
             Chess[][] chess = remake(chessCheck);
-            chess[x][y-1] = chess[x][y];
-            chess[x][y-1].setPoint(new PointOfChess(x , y-1));
+            chess[x][y - 1] = chess[x][y];
+            chess[x][y - 1].setPoint(new PointOfChess(x, y - 1));
             chess[x][y] = null;
             newGameMoves.add(chess);
         }
         if (y + 1 <= 10 && chessCheck[x][y + 1] == null) {
             Chess[][] chess = remake(chessCheck);
-            chess[x][y+1] = chess[x][y];
-            chess[x][y+1].setPoint(new PointOfChess(x , y+1));
+            chess[x][y + 1] = chess[x][y];
+            chess[x][y + 1].setPoint(new PointOfChess(x, y + 1));
             chess[x][y] = null;
             newGameMoves.add(chess);
         }
@@ -107,42 +107,43 @@ public class King extends Chess {
 
         ArrayList<Chess[][]> newGameMoves = new ArrayList<>();
 
-        if (x - 1 >= 4 && chessCheck[x - 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x-1][y].getStatus())!=0) {
+        if (x - 1 >= 4 && chessCheck[x - 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x - 1][y].getStatus()) != 0) {
             Chess[][] chess = remake(chessCheck);
             chess[x - 1][y] = chess[x][y];
             chess[x - 1][y].setPoint(new PointOfChess(x - 1, y));
             chess[x][y] = null;
             newGameMoves.add(chess);
         }
-        if (x + 1 <= 6 && chessCheck[x + 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x+1][y].getStatus())!=0) {
+        if (x + 1 <= 6 && chessCheck[x + 1][y] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x + 1][y].getStatus()) != 0) {
             Chess[][] chess = remake(chessCheck);
             chess[x + 1][y] = chess[x][y];
             chess[x + 1][y].setPoint(new PointOfChess(x + 1, y));
             chess[x][y] = null;
             newGameMoves.add(chess);
         }
-        if (y - 1 >= 8 && chessCheck[x][y - 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y-1].getStatus())!=0) {
+        if (y - 1 >= 8 && chessCheck[x][y - 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y - 1].getStatus()) != 0) {
             Chess[][] chess = remake(chessCheck);
-            chess[x][y-1] = chess[x][y];
-            chess[x][y-1].setPoint(new PointOfChess(x , y-1));
+            chess[x][y - 1] = chess[x][y];
+            chess[x][y - 1].setPoint(new PointOfChess(x, y - 1));
             chess[x][y] = null;
             newGameMoves.add(chess);
         }
-        if (y + 1 <= 10 && chessCheck[x][y + 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y+1].getStatus())!=0) {
+        if (y + 1 <= 10 && chessCheck[x][y + 1] != null && chessCheck[x][y].getStatus().compareTo(chessCheck[x][y + 1].getStatus()) != 0) {
             Chess[][] chess = remake(chessCheck);
-            chess[x][y+1] = chess[x][y];
-            chess[x][y+1].setPoint(new PointOfChess(x , y+1));
+            chess[x][y + 1] = chess[x][y];
+            chess[x][y + 1].setPoint(new PointOfChess(x, y + 1));
             chess[x][y] = null;
             newGameMoves.add(chess);
         }
         return newGameMoves;
     }
+
     private Chess[][] remake(Chess[][] another) {
         Chess[][] chess = new Chess[10][11];
-        for(int i = 1; i <= 9; ++i) {
-            for(int j = 1; j <= 10; ++j) {
-                if(another[i][j]!=null) {
-                    chess[i][j] = new Chess(another[i][j]);
+        for (int i = 1; i <= 9; ++i) {
+            for (int j = 1; j <= 10; ++j) {
+                if (another[i][j] != null) {
+                    chess[i][j] = (Chess) another[i][j].clone();
                 }
             }
         }

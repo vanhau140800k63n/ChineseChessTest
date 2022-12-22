@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Chess {
+public class Chess implements Cloneable {
     protected PointOfChess point;
     protected Image imageChessR;
     protected Image imageChessB;
@@ -9,7 +9,6 @@ public class Chess {
     protected int value;
 
     public Chess() {
-
     }
 
     public Chess(Chess another) {
@@ -52,18 +51,13 @@ public class Chess {
         return value;
     }
 
-    public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {
-        boolean[][] canGo = new boolean[10][11];
-
-        for(int i = 1; i <= 9; ++i) {
-            for(int j = 1; j <= 10; ++j) {
-                canGo[i][j] = false;
-            }
-        }
-        return canGo;
+    public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX,
+            int[] pointOfChessY) {
+        return null;
     }
 
-    public boolean[][] pointCanEat(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {
+    public boolean[][] pointCanEat(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX,
+            int[] pointOfChessY) {
         return null;
     }
 
@@ -75,4 +69,17 @@ public class Chess {
         return null;
     }
 
+    @Override
+	public Object clone() {
+	    try {
+	        return (Chess) super.clone();
+	    } catch (CloneNotSupportedException e) {
+	        return "!";
+	    }
+	}
+
+    @Override
+    public String toString() {
+        return point + " " + status + " " + value;
+    }
 }

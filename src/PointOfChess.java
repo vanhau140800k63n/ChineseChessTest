@@ -1,10 +1,8 @@
 public class PointOfChess {
-
     private int x;
     private int y;
 
     public PointOfChess() {
-
     }
 
     public PointOfChess(int x, int y) {
@@ -26,5 +24,10 @@ public class PointOfChess {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "x: " + this.x + ", y:" + this.y;
     }
 }

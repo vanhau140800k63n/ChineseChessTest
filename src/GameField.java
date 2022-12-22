@@ -9,3 +9,4 @@ public class GameField extends JFrame {
         setVisible(true);
     }
 }
+ 

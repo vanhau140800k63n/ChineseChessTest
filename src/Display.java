@@ -1,9 +1,9 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
+import javax.swing.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.ActionListener;
 
 public class Display extends FrameChess implements ActionListener {
     private Image chineseChess;
@@ -25,15 +25,27 @@ public class Display extends FrameChess implements ActionListener {
         g2d.drawImage(chineseChess, 0, 0, null);
 
         for (Chess chess : chessRed) {
-            g2d.drawImage(chess.getImageChessR(), pointOfChessX[chess.getPoint().getX()] - 340, pointOfChessY[chess.getPoint().getY()] - 55, null);
+            g2d.drawImage(chess.getImageChessR(), pointOfChessX[chess.getPoint().getX()] - 340,
+                    pointOfChessY[chess.getPoint().getY()] - 55, null);
         }
 
         for (Chess chess : chessBlack) {
-            g2d.drawImage(chess.getImageChessB(), pointOfChessX[chess.getPoint().getX()] - 340, pointOfChessY[chess.getPoint().getY()] - 55, null);
+            g2d.drawImage(chess.getImageChessB(), pointOfChessX[chess.getPoint().getX()] - 340,
+                    pointOfChessY[chess.getPoint().getY()] - 55, null);
         }
-        if (kt == true) {
-            canGo = chessSelect.pointCanGo(chessCheck, chessSelect.getPoint().getX(), chessSelect.getPoint().getY(), g2d, pointOfChessX, pointOfChessY);
-            canEat = chessSelect.pointCanEat(chessCheck, chessSelect.getPoint().getX(), chessSelect.getPoint().getY(), g2d, pointOfChessX, pointOfChessY);
+
+        if (checkAction == true && chessSelect != null) {
+            canGo = chessSelect.pointCanGo(chessCheck, chessSelect.getPoint().getX(), chessSelect.getPoint().getY(),
+                    g2d, pointOfChessX, pointOfChessY);
+            canEat = chessSelect.pointCanEat(chessCheck, chessSelect.getPoint().getX(), chessSelect.getPoint().getY(),
+                    g2d, pointOfChessX, pointOfChessY);
+        }
+
+        if (botTurn) {
+            calculateBestMove();
+
+            botTurn = false;
+            repaint();
         }
     }
 
@@ -55,107 +67,43 @@ public class Display extends FrameChess implements ActionListener {
         }
 
         private void doMove(MouseEvent e) {
+            if (!botTurn) {
+                PointerInfo pointerInfo = MouseInfo.getPointerInfo();
+                Point point = pointerInfo.getLocation();
 
-            PointerInfo pointerInfo = MouseInfo.getPointerInfo();
-            Point point = pointerInfo.getLocation();
-            if (ktChessRed == true) {
-                if (chessRed.contains(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())])) {
-                    chessSelect = chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())];
-                    kt = true;
+                int pointX = getPointX((int) point.getX());
+                int pointY = getPointY((int) point.getY());
+
+                if (chessRed.contains(chessCheck[pointX][pointY])) {
+                    chessSelect = chessCheck[pointX][pointY];
+                    checkAction = true;
                 }
-            } else if (ktChessBlack == true) {
-                if (chessBlack.contains(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())])) {
-                    chessSelect = chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())];
-                    kt = true;
-                }
-            }
-            if (kt == true) {
-                if (canEat[getPointX((int) point.getX())][getPointY((int) point.getY())] == true) {
-                    chessBlack.remove(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())]);
-                    chessRed.remove(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())]);
-                    chessSelect.setPoint(new PointOfChess(getPointX((int) point.getX()), getPointY((int) point.getY())));
-                    editChess();
-                    swap();
-                    remakeCanEat();
-                    kt = false;
-                    if(ktChessRed == true) {
-                        ktChessRed = false;
-                        ktChessBlack = true;
-                    } else {
-                        ktChessBlack = false;
-                        ktChessRed = true;
+
+                if (checkAction == true) {
+                    if (canGo[pointX][pointY] == true) {
+                        chessSelect.setPoint(new PointOfChess(pointX, pointY));
+
+                        editChess();
+                        remakeCanGo();
+                        checkAction = false;
+                        botTurn = true;
+                        chessSelect = null;
+                    }
+
+                    if (canEat[pointX][pointY] == true) {
+                        chessBlack.remove(chessCheck[pointX][pointY]);
+                        chessSelect.setPoint(new PointOfChess(pointX, pointY));
+
+                        editChess();
+                        remakeCanEat();
+                        checkAction = false;
+                        botTurn = true;
+                        chessSelect = null;
                     }
                 }
-                if (canGo[getPointX((int) point.getX())][getPointY((int) point.getY())] == true) {
-                    chessSelect.setPoint(new PointOfChess(getPointX((int) point.getX()), getPointY((int) point.getY())));
-                    editChess();
-                    kt = false;
-                    remakeCanGo();
-                    swap();
-                    if(ktChessRed == true) {
-                        ktChessRed = false;
-                        ktChessBlack = true;
-                    } else {
-                        ktChessBlack = false;
-                        ktChessRed = true;
-                    }
-                }
-//                if(ktChessRed == false) {
-//                    swap();
-//                    Bot.calculateBestMove(chessCheck,chessRed,chessBlack);
-//                    swap();
-//                    System.out.println(chessBlack.size() + chessRed.size());
-//                }
+
+                repaint();
             }
-            repaint();
-
-
-//            if(ktChessRed == true) {
-//                if (chessRed.contains(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())])) {
-//                    chessSelect = chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())];
-//                    kt = true;
-//                }
-//            } else {
-//                if (chessBlack.contains(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())])) {
-//                    chessSelect = chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())];
-//                    kt = true;
-//                }
-//            }
-//            if(kt == true) {
-//                if(canGo[getPointX((int) point.getX())][getPointY((int) point.getY())] == true) {
-//                    chessSelect.setPoint(new PointOfChess(getPointX((int) point.getX()),getPointY((int) point.getY())));
-//                    editChess();
-//                    remakeCanGo();
-//                    kt = false;
-//                    if(ktChessRed == true) {
-//                        ktChessRed = false;
-//                        ktChessBlack = true;
-//                        swap();
-//                        Bot.calculateBestMove(chessCheck, chessRed, chessBlack);
-//                    } else {
-//                        ktChessRed = true;
-//                        ktChessBlack = false;
-//                        swap();
-//                    }
-//                }
-//                if(canEat[getPointX((int) point.getX())][getPointY((int) point.getY())] == true) {
-//                    chessBlack.remove(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())]);
-//                    chessRed.remove(chessCheck[getPointX((int) point.getX())][getPointY((int) point.getY())]);
-//                    chessSelect.setPoint(new PointOfChess( getPointX((int) point.getX()),getPointY((int) point.getY())));
-//                    editChess();
-//                    remakeCanEat();
-//                    kt = false;
-//                    if(ktChessRed == true) {
-//                        ktChessRed = false;
-//                        ktChessBlack = true;
-//                        swap();
-//                    } else {
-//                        ktChessRed = true;
-//                        ktChessBlack = false;
-//                        swap();
-//                    }
-//                }
-//            }
         }
     }
 }
