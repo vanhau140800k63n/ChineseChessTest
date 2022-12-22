@@ -8,7 +8,7 @@ public class Pawn extends Chess {
         super(point);
         super.imageChessR = new ImageIcon("PawnR.png").getImage();
         super.imageChessB = new ImageIcon("PawnB.png").getImage();
-        super.value = 2;
+        super.value = 9;
     }
 
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {

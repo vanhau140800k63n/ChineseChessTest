@@ -2,6 +2,10 @@ public class State {
     private Chess[][] state;
     private int score;
 
+    public State() {
+        
+    }
+
     public Chess[][] getState() {
         return state;
     }

@@ -160,7 +160,9 @@ public class FrameChess extends JPanel {
     }
 
     public void calculateBestMove() {
-        chessCheck = maxval(chessCheck, 1, 1).getState();
+        State maxval = maxval(chessCheck, 1, 1, -99999, 99999);
+        System.out.println(maxval.getScore());
+        chessCheck = getSwapState(maxval.getState());
 
         chessBlack.clear();
         chessRed.clear();
@@ -184,9 +186,11 @@ public class FrameChess extends JPanel {
             for (int j = 1; j <= 10; ++j) {
                 if (chessState[i][j] != null) {
                     chess[10 - i][11 - j] = (Chess) chessState[i][j].clone();
+                    chess[10 - i][11 - j].setPoint(new PointOfChess(10 - i, 11 - j));
                 }
             }
         }
+
         return chess;
     }
 
@@ -196,18 +200,26 @@ public class FrameChess extends JPanel {
         if (status == 1) {
             for (int i = 1; i <= 9; ++i) {
                 for (int j = 1; j <= 10; ++j) {
-                    if (chess[i][j].getStatus() == "BLACK") {
-                        newGameMoves.addAll(chess[i][j].botCanEat(chess, i, j));
-                        newGameMoves.addAll(chess[i][j].botCanGo(chess, i, j));
+                    try {
+                        if (chess[i][j] != null && chess[i][j].getStatus() == "BLACK") {
+                            newGameMoves.addAll(chess[i][j].botCanEat(chess, i, j));
+                            newGameMoves.addAll(chess[i][j].botCanGo(chess, i, j));
+                        }
+                    } catch (Exception ex) {
+                        System.out.println(chess[i][j]);
                     }
                 }
             }
         } else {
             for (int i = 1; i <= 9; ++i) {
                 for (int j = 1; j <= 10; ++j) {
-                    if (chess[i][j].getStatus() == "RED") {
-                        newGameMoves.addAll(chess[i][j].botCanEat(chess, i, j));
-                        newGameMoves.addAll(chess[i][j].botCanGo(chess, i, j));
+                    try {
+                        if (chess[i][j] != null && chess[i][j].getStatus() == "RED") {
+                            newGameMoves.addAll(chess[i][j].botCanEat(chess, i, j));
+                            newGameMoves.addAll(chess[i][j].botCanGo(chess, i, j));
+                        }
+                    } catch (Exception ex) {
+                        System.out.println(chess[i][j]);
                     }
                 }
             }
@@ -216,41 +228,60 @@ public class FrameChess extends JPanel {
         return newGameMoves;
     }
 
-    public int minimax(Chess[][] chessState, int status, int depth) {
-        if (depth == 2) {
+    public int minimax(Chess[][] chessState, int status, int depth, int alpha, int beta) {
+        if (depth == 4) {
             return scoreOfMove(chessState);
         }
 
         if (status == 1) {
-            return maxval(chessState, status, depth).getScore();
+            return maxval(chessState, status, depth, alpha, beta).getScore();
         } else {
-            return minval(chessState, status, depth).getScore();
+            return minval(chessState, status, depth, alpha, beta).getScore();
         }
     }
 
-    public State maxval(Chess[][] chessState, int status, int depth) {
+    public State maxval(Chess[][] chessState, int status, int depth, int alpha, int beta) {
         State state = new State();
         state.setScore(-99999);
         for (Chess[][] chess : listOfState(chessState, status)) {
-            int value = minimax(chess, status + 1, depth + 1);
+            int value = minimax(chess, status + 1, depth + 1, alpha, beta);
             if (value > state.getScore()) {
                 state.setScore(value);
                 state.setState(chess);
             }
+
+            if (state.getScore() > beta) {
+                return state;
+            } else {
+                if (state.getScore() > alpha) {
+                    alpha = state.getScore();
+                }
+            }
         }
+
         return state;
     }
 
-    public State minval(Chess[][] chessState, int status, int depth) {
+    public State minval(Chess[][] chessState, int status, int depth, int alpha, int beta) {
         State state = new State();
         state.setScore(99999);
         for (Chess[][] chess : listOfState(chessState, status)) {
-            int value = minimax(chess, status - 1, depth + 1);
+            int value = minimax(chess, status - 1, depth + 1, alpha, beta);
             if (value < state.getScore()) {
                 state.setScore(value);
                 state.setState(chess);
+                // if(value < 0) System.out.println(value);
+            }
+
+            if (state.getScore() < alpha) {
+                return state;
+            } else {
+                if (state.getScore() < beta) {
+                    beta = state.getScore();
+                }
             }
         }
+
         return state;
     }
 
@@ -259,13 +290,22 @@ public class FrameChess extends JPanel {
         int valueFinal = 0;
         for (int i = 1; i <= 9; ++i) {
             for (int j = 1; j <= 10; ++j) {
-                if (chessCheck[i][j].getStatus() == "BLACK") {
+                if (chessCheck[i][j] != null && chessCheck[i][j].getStatus() == "BLACK") {
                     value += chessCheck[i][j].getValue();
-                    valueFinal += chessCheck[i][j].getValue();
                 }
-                if (chessCheck[i][j].getStatus() == "RED") {
+                if (chessCheck[i][j] != null && chessCheck[i][j].getStatus() == "RED") {
                     value -= chessCheck[i][j].getValue();
-                    valueFinal -= chessCheck[i][j].getValue();
+                }
+            }
+        }
+
+        for (int i = 1; i <= 9; ++i) {
+            for (int j = 1; j <= 10; ++j) {
+                if (finalState[i][j] != null && finalState[i][j].getStatus() == "BLACK") {
+                    valueFinal += finalState[i][j].getValue();
+                }
+                if (finalState[i][j] != null && finalState[i][j].getStatus() == "RED") {
+                    valueFinal -= finalState[i][j].getValue();
                 }
             }
         }

@@ -7,7 +7,7 @@ public class Elephant extends Chess {
         super(point);
         super.imageChessR = new ImageIcon("ElephantR.png").getImage();
         super.imageChessB = new ImageIcon("ElephantB.png").getImage();
-        super.value = 5;
+        super.value = 22;
     }
 
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {

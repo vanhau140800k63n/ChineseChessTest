@@ -1,14 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Cannon extends Chess {
     public Cannon(PointOfChess point) {
         super(point);
         super.imageChessR = new ImageIcon("CannonR.png").getImage();
         super.imageChessB = new ImageIcon("CannonB.png").getImage();
-        super.value = 10;
+        super.value = 51;
     }
 
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {
