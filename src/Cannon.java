@@ -7,7 +7,8 @@ public class Cannon extends Chess {
         super(point);
         super.imageChessR = new ImageIcon("CannonR.png").getImage();
         super.imageChessB = new ImageIcon("CannonB.png").getImage();
-        super.value = 51;
+        super.value = 600;
+        super.posValues = 4;
     }
 
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {

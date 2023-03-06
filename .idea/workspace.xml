@@ -2,20 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="032c87d7-cea9-4b60-9abe-52304e602df3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/META-INF/ChineseChess.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Advisor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Advisor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Bot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Cannon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Cannon.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Chess.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Chess.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Display$MovingAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Display$MovingAdapter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Display.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Display.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Elephant.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Elephant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/FrameChess.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/FrameChess.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Horse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Horse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/King.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Pawn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Pawn.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/PointOfChess.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/PointOfChess.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ChineseChess/Rook.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ChineseChess/Rook.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Advisor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Advisor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cannon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cannon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Display.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Display.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Elephant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Elephant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FrameChess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FrameChess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Horse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Horse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/King.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PointOfChess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PointOfChess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,5 +90,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

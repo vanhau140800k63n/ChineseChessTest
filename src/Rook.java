@@ -8,7 +8,8 @@ public class Rook extends Chess {
         super(point);
         super.imageChessR = new ImageIcon("RookR.png").getImage();
         super.imageChessB = new ImageIcon("RookB.png").getImage();
-        super.value = 64;
+        super.value = 1500;
+        super.posValues = 0;
     }
 
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {

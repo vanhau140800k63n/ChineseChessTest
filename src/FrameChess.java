@@ -14,6 +14,7 @@ public class FrameChess extends JPanel {
     protected Chess[][] chessCheck = new Chess[10][11];
     protected boolean[][] canGo = new boolean[10][11];
     protected boolean[][] canEat = new boolean[10][11];
+    private boolean isSwap = false;
 
     protected boolean botTurn = false;
 
@@ -191,6 +192,8 @@ public class FrameChess extends JPanel {
             }
         }
 
+        isSwap = !isSwap;
+
         return chess;
     }
 
@@ -229,7 +232,7 @@ public class FrameChess extends JPanel {
     }
 
     public int minimax(Chess[][] chessState, int status, int depth, int alpha, int beta) {
-        if (depth == 4) {
+        if (depth == 5) {
             return scoreOfMove(chessState);
         }
 
@@ -292,9 +295,15 @@ public class FrameChess extends JPanel {
             for (int j = 1; j <= 10; ++j) {
                 if (chessCheck[i][j] != null && chessCheck[i][j].getStatus() == "BLACK") {
                     value += chessCheck[i][j].getValue();
+                    if (chessCheck[i][j].getPosValues() >= 0) {
+                        value += Evaluation.posValues[chessCheck[i][j].getPosValues()][j - 1][i - 1];
+                    }
                 }
                 if (chessCheck[i][j] != null && chessCheck[i][j].getStatus() == "RED") {
                     value -= chessCheck[i][j].getValue();
+                    if (chessCheck[i][j].getPosValues() >= 0) {
+                        value -= Evaluation.posValues[chessCheck[i][j].getPosValues() + 1][j - 1][i - 1];
+                    }
                 }
             }
         }
@@ -303,9 +312,23 @@ public class FrameChess extends JPanel {
             for (int j = 1; j <= 10; ++j) {
                 if (finalState[i][j] != null && finalState[i][j].getStatus() == "BLACK") {
                     valueFinal += finalState[i][j].getValue();
+                    if (finalState[i][j].getPosValues() >= 0) {
+                        if (isSwap) {
+                            valueFinal += Evaluation.posValues[finalState[i][j].getPosValues() + 1][j - 1][i - 1];
+                        } else {
+                            valueFinal += Evaluation.posValues[finalState[i][j].getPosValues()][j - 1][i - 1];
+                        }
+                    }
                 }
                 if (finalState[i][j] != null && finalState[i][j].getStatus() == "RED") {
                     valueFinal -= finalState[i][j].getValue();
+                    if (finalState[i][j].getPosValues() >= 0) {
+                        if (isSwap) {
+                            valueFinal -= Evaluation.posValues[finalState[i][j].getPosValues()][j - 1][i - 1];
+                        } else {
+                            valueFinal -= Evaluation.posValues[finalState[i][j].getPosValues() + 1][j - 1][i - 1];
+                        }
+                    }
                 }
             }
         }

@@ -8,7 +8,8 @@ public class Horse extends Chess {
         super(point);
         super.imageChessR = new ImageIcon("HorseR.png").getImage();
         super.imageChessB = new ImageIcon("HorseB.png").getImage();
-        super.value = 27;
+        super.value = 270;
+        super.posValues = 2;
     }
 
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX,
@@ -131,7 +132,7 @@ public class Horse extends Chess {
             newGameMoves.add(chess);
         }
         if (x + 2 <= 9 && y - 1 >= 1 && chessCheck[x + 2][y - 1] == null && chessCheck[x + 1][y] == null) {
-            Chess[][] chess = chessCheck.clone();
+            Chess[][] chess = remake(chessCheck);
             chess[x + 2][y - 1] = chess[x][y];
             chess[x + 2][y - 1].setPoint(new PointOfChess(x + 2, y - 1));
             chess[x][y] = null;
@@ -198,7 +199,7 @@ public class Horse extends Chess {
         }
         if (x + 2 <= 9 && y - 1 >= 1 && chessCheck[x + 2][y - 1] != null && chessCheck[x + 1][y] == null
                 && chessCheck[x][y].getStatus().compareTo(chessCheck[x + 2][y - 1].getStatus()) != 0) {
-            Chess[][] chess = chessCheck.clone();
+            Chess[][] chess = remake(chessCheck);
             chess[x + 2][y - 1] = chess[x][y];
             chess[x + 2][y - 1].setPoint(new PointOfChess(x + 2, y - 1));
             chess[x][y] = null;

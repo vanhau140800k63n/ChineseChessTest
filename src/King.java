@@ -8,7 +8,7 @@ public class King extends Chess {
         super(point);
         super.imageChessR = new ImageIcon("KingR.png").getImage();
         super.imageChessB = new ImageIcon("KingB.png").getImage();
-        super.value = 100;
+        super.value = 6000;
     }
 
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX, int[] pointOfChessY) {

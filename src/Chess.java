@@ -7,6 +7,7 @@ public class Chess implements Cloneable {
     protected Image imageChessB;
     protected String status;
     protected int value;
+    protected int posValues = -1;
 
     public Chess() {
     }
@@ -51,6 +52,10 @@ public class Chess implements Cloneable {
         return value;
     }
 
+    public int getPosValues() {
+        return posValues;
+    }
+
     public boolean[][] pointCanGo(Chess[][] chessCheck, int x, int y, Graphics2D g2d, int[] pointOfChessX,
             int[] pointOfChessY) {
         return null;
@@ -70,13 +75,13 @@ public class Chess implements Cloneable {
     }
 
     @Override
-	public Object clone() {
-	    try {
-	        return (Chess) super.clone();
-	    } catch (CloneNotSupportedException e) {
-	        return "!";
-	    }
-	}
+    public Object clone() {
+        try {
+            return (Chess) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return "!";
+        }
+    }
 
     @Override
     public String toString() {
